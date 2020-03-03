@@ -1,20 +1,12 @@
 import React from "react";
 import FontAwesome from "react-fontawesome";
-import uuid from "uuid/v4";
-import { iconsHashTable } from '../../helper';
+import { iconsArr } from '../../helper';
 
 class McVSScreen extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-           objects: {
-               id1: 0,
-               id2: 0,
-               id3: 0,
-               id4: 0,
-               id5: 0,
-               id6: 0,
-           }
+           items: [0, 0, 0, 0, 0, 0]
         }
     }
     componentDidMount() {
@@ -28,15 +20,16 @@ class McVSScreen extends React.PureComponent {
         window.removeEventListener("keydown", this.listenerKeys);
     }
     render() {
-        const { objects } = this.state;
+        const { items } = this.state;
 
         return (<div className="fight">
             <section className="container container__mod">
-                {Object.values(objects).map((item) => {
+                {items.map((item, index) => {
+                    const name = iconsArr[item];
                     return (
-                        <div key={uuid()}>
+                        <div key={`${index}`}>
                             <FontAwesome
-                                name={iconsHashTable[item]}
+                                name={name}
                                 size="2x"
                             />
                         </div>);
@@ -44,52 +37,65 @@ class McVSScreen extends React.PureComponent {
             </section>
         </div>);
     }
-    setChanges = (numKey) => {
-        const key = this.state.objects[numKey];
-        if(key === 6) {
-            this.changeId(numKey, 0);
+    setChanges = (indexInArray) => {
+        const currNumber = this.state.items[indexInArray];
+        const nextNumber = currNumber + 1;
+        const currRow = 6;
+        const defaultValue  = 0;
+        if(currNumber === currRow) {
+            this.changeId(indexInArray, defaultValue);
         } else {
-            this.changeId(numKey, key + 1);
+            this.changeId(indexInArray, nextNumber);
         }
 
     };
 
     listenerKeys = (e) => {
       const { keyCode } = e;
-      const id1  = 'id1',
-          id2 = 'id2', id3 = 'id3', id4 = 'id4', id5 = 'id5', id6 = 'id6';
+
       if (keyCode === 81) {
           // q
-          this.setChanges(id1);
+          const indexInArray = 0;
+          this.setChanges(indexInArray);
       }
       if (keyCode === 87) {
           //w
-          this.setChanges(id2)
+          const indexInArray = 1;
+          this.setChanges(indexInArray);
       }
       if (keyCode === 69) {
           // e
-          this.setChanges(id3);
+          const indexInArray = 2;
+          this.setChanges(indexInArray);
       }
       if (keyCode === 82) {
             // r
-          this.setChanges(id4);
+          const indexInArray = 3;
+          this.setChanges(indexInArray);
       }
       if (keyCode === 84) {
             //t
-          this.setChanges(id5);
+          const indexInArray = 4;
+          this.setChanges(indexInArray);
       }
       if (keyCode === 89) {
             // y
-          this.setChanges(id6);
+          const indexInArray = 5;
+          this.setChanges(indexInArray);
       }
 
     };
-    changeId = (key, value) => {
-        const { objects } = this.state;
-        this.setState({ objects: {
-            ...objects,
-            [key]: value
-            } });
+    changeId = (indexInArray, value) => {
+        const { items } = this.state;
+        const changeItemInAr = items.reduce((prev, curr, index) => {
+            if (indexInArray === index) {
+                return prev.concat(value);
+            }
+            return prev.concat(curr);
+        }, []);
+        this.setState({
+            items: changeItemInAr
+        })
     };
 }
 

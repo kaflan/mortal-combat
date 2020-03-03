@@ -2,12 +2,14 @@ import React from "react";
 import RenderHeroes from '../RenderHeroes';
 import { heroesArrCreate } from "../../helper";
 
+const defaultHeroLength = 24;
+
 class McChooseHero extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             heroId: 0,
-            heroes: heroesArrCreate(24),
+            heroes: heroesArrCreate(defaultHeroLength),
         }
     }
     componentDidMount() {
@@ -33,24 +35,36 @@ class McChooseHero extends React.PureComponent {
         const { history } = this.props;
         const { keyCode } = e;
         const l = heroes.length;
+        const upArrow = 38;
+        const downArrow = 40;
+        const leftArrow = 37;
+        const rightArrow = 39;
+        const confirmThePick = 13;
+        const upRow = 18;
+        const downRow = 6;
+        const step = 1;
         const coordinates = (x) => ((x % l) + l) % l;
-        if (keyCode === 38) {
+        if (keyCode === upArrow) {
             // up arrow
-            this.changeHero(coordinates(heroId + 18));
+            const currNumber = heroId + upRow;
+            this.changeHero(coordinates(currNumber));
         }
-        else if (keyCode === 40) {
+        else if (keyCode === downArrow) {
             // down arrow
-            this.changeHero(coordinates( heroId + 6));
+            const currNumber  = heroId + downRow;
+            this.changeHero(coordinates( currNumber));
         }
-        else if (keyCode === 37) {
+        else if (keyCode === leftArrow) {
             // left arrow
-            this.changeHero(coordinates(heroId - 1));
+            const currNumber = heroId - step;
+            this.changeHero(coordinates(currNumber));
         }
-        else if (keyCode === 39) {
+        else if (keyCode === rightArrow) {
             // right arrow
-            this.changeHero(coordinates(heroId + 1));
+            const currNumber = heroId + step;
+            this.changeHero(coordinates(currNumber));
         }
-        else if (keyCode === 13) {
+        else if (keyCode === confirmThePick) {
             // change to the fight screen
             history.push('/battle')
         }

@@ -1,16 +1,6 @@
 export const heroesArrCreate = (number) => {
-    return [...Array(number).keys()].map((x) => ({
-        id: x
-    }));
+    return [...Array(number).keys()].map((x) => (x));
 };
 
 
-export const iconsHashTable = {
-    0: 'free-code-camp',
-    1: 'snowflake-o',
-    2: 'podcast',
-    3: 'asterisk',
-    4: 'compass',
-    5: 'female',
-    6: 'balance-scale'
-};
+export const iconsArr = ['free-code-camp', 'snowflake-o', 'podcast', 'asterisk', 'compass', 'female', 'balance-scale'];
