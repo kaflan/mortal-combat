@@ -1,6 +1,6 @@
 import React from "react";
 import FontAwesome from "react-fontawesome";
-import { iconsArr } from '../../helper';
+import { iconsArr, w, e, q, r, t, y } from '../../helper';
 
 class McVSScreen extends React.PureComponent {
     constructor(props) {
@@ -50,35 +50,35 @@ class McVSScreen extends React.PureComponent {
 
     };
 
-    listenerKeys = (e) => {
-      const { keyCode } = e;
+    listenerKeys = (event) => {
+      const { keyCode } = event;
 
-      if (keyCode === 81) {
+      if (keyCode === q) {
           // q
           const indexInArray = 0;
           this.setChanges(indexInArray);
       }
-      if (keyCode === 87) {
+      if (keyCode === w) {
           //w
           const indexInArray = 1;
           this.setChanges(indexInArray);
       }
-      if (keyCode === 69) {
+      if (keyCode === e) {
           // e
           const indexInArray = 2;
           this.setChanges(indexInArray);
       }
-      if (keyCode === 82) {
+      if (keyCode === r) {
             // r
           const indexInArray = 3;
           this.setChanges(indexInArray);
       }
-      if (keyCode === 84) {
+      if (keyCode === t) {
             //t
           const indexInArray = 4;
           this.setChanges(indexInArray);
       }
-      if (keyCode === 89) {
+      if (keyCode === y) {
             // y
           const indexInArray = 5;
           this.setChanges(indexInArray);

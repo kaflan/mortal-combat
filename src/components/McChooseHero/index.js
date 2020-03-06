@@ -1,8 +1,10 @@
 import React from "react";
 import RenderHeroes from '../RenderHeroes';
-import { heroesArrCreate } from "../../helper";
+import { heroesArrCreate,
+    defaultHeroLength, coordinates, upArrow, upRow, downArrow, downRow,
+    leftArrow, step, rightArrow, confirmThePick
+} from "../../helper";
 
-const defaultHeroLength = 24;
 
 class McChooseHero extends React.PureComponent {
     constructor(props) {
@@ -35,34 +37,25 @@ class McChooseHero extends React.PureComponent {
         const { history } = this.props;
         const { keyCode } = e;
         const l = heroes.length;
-        const upArrow = 38;
-        const downArrow = 40;
-        const leftArrow = 37;
-        const rightArrow = 39;
-        const confirmThePick = 13;
-        const upRow = 18;
-        const downRow = 6;
-        const step = 1;
-        const coordinates = (x) => ((x % l) + l) % l;
         if (keyCode === upArrow) {
             // up arrow
             const currNumber = heroId + upRow;
-            this.changeHero(coordinates(currNumber));
+            this.changeHero(coordinates(currNumber, l));
         }
         else if (keyCode === downArrow) {
             // down arrow
             const currNumber  = heroId + downRow;
-            this.changeHero(coordinates( currNumber));
+            this.changeHero(coordinates( currNumber, l));
         }
         else if (keyCode === leftArrow) {
             // left arrow
             const currNumber = heroId - step;
-            this.changeHero(coordinates(currNumber));
+            this.changeHero(coordinates(currNumber, l));
         }
         else if (keyCode === rightArrow) {
             // right arrow
             const currNumber = heroId + step;
-            this.changeHero(coordinates(currNumber));
+            this.changeHero(coordinates(currNumber, l));
         }
         else if (keyCode === confirmThePick) {
             // change to the fight screen
