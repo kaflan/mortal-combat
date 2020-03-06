@@ -1,6 +1,6 @@
 import React from "react";
 import FontAwesome from "react-fontawesome";
-import { iconsArr, w, e, q, r, t, y } from '../../helper';
+import { iconsArr, w, e, q, r, t, y, step } from '../../helper';
 
 class McVSScreen extends React.PureComponent {
     constructor(props) {
@@ -39,7 +39,7 @@ class McVSScreen extends React.PureComponent {
     }
     setChanges = (indexInArray) => {
         const currNumber = this.state.items[indexInArray];
-        const nextNumber = currNumber + 1;
+        const nextNumber = currNumber + step;
         const currRow = 6;
         const defaultValue  = 0;
         if(currNumber === currRow) {
